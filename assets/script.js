@@ -49,3 +49,11 @@ function updateDots(index) {
 	});
 }
 
+// Fonction mise à jour Caroussel
+function updateCarousel(index, direction) {
+	// Ajout image
+	const imagePath = `assets/images/slideshow/${slides[currentIndex].image}`;
+    bannerImg.src = imagePath;
+    bannerImg.alt = `Slide ${currentIndex + 1}`;
+
+}
