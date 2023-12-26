@@ -55,5 +55,9 @@ function updateCarousel(index, direction) {
 	const imagePath = `assets/images/slideshow/${slides[currentIndex].image}`;
     bannerImg.src = imagePath;
     bannerImg.alt = `Slide ${currentIndex + 1}`;
+	
+	// Ajout texte
+	const tagLine = slides[currentIndex].tagLine;
+    document.querySelector('p').innerHTML = tagLine;
 
 }
