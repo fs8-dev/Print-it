@@ -51,13 +51,23 @@ function updateDots(index) {
 
 // Fonction mise à jour Caroussel
 function updateCarousel(index, direction) {
+      //Fix bug défilement
+      if (currentIndex === -1 && direction === "left") {
+        currentIndex = slides.length - 1;
+    } else if (currentIndex === slides.length && direction === "right") {
+        currentIndex = 0;
+    }
+
 	// Ajout image
 	const imagePath = `assets/images/slideshow/${slides[currentIndex].image}`;
-    bannerImg.src = imagePath;
-    bannerImg.alt = `Slide ${currentIndex + 1}`;
-	
+	bannerImg.src = imagePath;
+	bannerImg.alt = `Slide ${currentIndex + 1}`;
+
 	// Ajout texte
 	const tagLine = slides[currentIndex].tagLine;
-    document.querySelector('p').innerHTML = tagLine;
+	document.querySelector('p').innerHTML = tagLine;
 
+	console.log(`Clic sur la flèche ${direction}`);
 }
+
+
