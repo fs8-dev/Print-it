@@ -20,21 +20,47 @@ const slides = [
 const bannerImg = document.querySelector(".banner-img");
 const arrowLeft = document.querySelector(".arrow_left");
 const arrowRight = document.querySelector(".arrow_right");
-const dots = document.querySelectorAll(".dot");
+const dotsParent = document.querySelector("#dots");
 
 let currentIndex = 0;
 
+// Boucle slides et création dots chaque slides
+// Ajout EventListener sur chaque dot pour changer de slides après chaque clique
+for (let i=0, l=slides.length; i < l ; i++) {
+	const dot = document.createElement('div') 
+	dot.addEventListener('click', function () {
+		currentIndex = i
+		updateCarousel()
+		updateDots(i)
+	})  
+	dot.classList.add('dot')
+	if (i === 0) {
+		dot.classList.add('dot_selected')
+	}
+	dotsParent.appendChild(dot)
+}
+
+const dots = document.querySelectorAll(".dot")
+
 // Event Listener flèche gauche
 arrowLeft.addEventListener("click", function () {
-	currentIndex = (currentIndex - 1);
-	updateCarousel(currentIndex, "left");
+	if (currentIndex === 0) {
+		currentIndex = slides.length - 1;
+	} else {
+		currentIndex--
+	}
+	updateCarousel();
 	updateDots(currentIndex);
 });
 
 // Event Listener flèche droite
 arrowRight.addEventListener("click", function () {
-	currentIndex = (currentIndex + 1);
-	updateCarousel(currentIndex, "right");
+	if (currentIndex === slides.length - 1) {
+		currentIndex = 0;
+	} else {
+		currentIndex++
+	}
+	updateCarousel();
 	updateDots(currentIndex);
 });
 
@@ -50,14 +76,7 @@ function updateDots(index) {
 }
 
 // Fonction mise à jour Caroussel
-function updateCarousel(index, direction) {
-      //Fix bug défilement
-      if (currentIndex === -1 && direction === "left") {
-        currentIndex = slides.length - 1;
-    } else if (currentIndex === slides.length && direction === "right") {
-        currentIndex = 0;
-    }
-
+function updateCarousel() {
 	// Ajout image
 	const imagePath = `assets/images/slideshow/${slides[currentIndex].image}`;
 	bannerImg.src = imagePath;
@@ -66,8 +85,6 @@ function updateCarousel(index, direction) {
 	// Ajout texte
 	const tagLine = slides[currentIndex].tagLine;
 	document.querySelector('p').innerHTML = tagLine;
-
-	console.log(`Clic sur la flèche ${direction}`);
 }
 
 
