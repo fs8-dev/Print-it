@@ -26,13 +26,13 @@ let currentIndex = 0;
 
 // Boucle slides et création dots chaque slides
 // Ajout EventListener sur chaque dot pour changer de slides après chaque clique
-for (let i=0, l=slides.length; i < l ; i++) {
-	const dot = document.createElement('div') 
+for (let i = 0, l = slides.length; i < l; i++) {
+	const dot = document.createElement('div')
 	dot.addEventListener('click', function () {
 		currentIndex = i
 		updateCarousel()
 		updateDots(i)
-	})  
+	})
 	dot.classList.add('dot')
 	if (i === 0) {
 		dot.classList.add('dot_selected')
